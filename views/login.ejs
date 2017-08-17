@@ -10,9 +10,22 @@
     <link href="/stylesheets/main.b7bd59c1.css" rel="stylesheet">
 </head>
 <body>
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<div id="root"></div>
-<script type="text/javascript" src="javascripts/main.43e01130.js"></script>
+<h2>Sample Login Page</h2>
+
+<form class="login_form">
+    <div>
+    <label id="user_name_label" for="user_name">User Name:</label>
+        <input type="text" name="user_name" id="user_name" value="">
+    </div>
+    <div>
+        <label id="password_label" for="password">Password:</label>
+        <input type="text" name="password" id="password" value="">
+    </div>
+    <div>
+        <button type="button" data-login-in-button>Sign in</button>
+    </div>
+</form>
+
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script src="javascripts/firebase-authentication.js"></script>
 

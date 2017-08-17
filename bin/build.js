@@ -29,5 +29,7 @@ function copyFile(source, target, callback) {
 
 copyFile('../node_modules/react-components/build/static/js/main.43e01130.js',
   '../public/javascripts/main.43e01130.js', function(error) {
-    console.log(error);
+    if (error) {
+      console.log(error);
+    }
   });
