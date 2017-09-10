@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "cd node_modules/react-components && npm run build && ./bin/build.js"
+    "frontend:build": "node ./bin/build.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -16,6 +16,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "react-components":"https://github.com/bytewarestudios/react-components.git#master"
+    "glob": "^7.1.2",
+    "react-components": "https://github.com/bytewarestudios/react-components.git#master"
   }
 }

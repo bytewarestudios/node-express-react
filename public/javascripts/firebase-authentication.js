@@ -32,13 +32,35 @@
    */
   FirebaseUserAccount.prototype.signIn = function (email, password) {
 
+    // todo: pull in from a config file
+    var AUTH_PERSISTENCE = {
+      SESSION: firebase.auth.Auth.Persistence.SESSION,
+      LOCAL: firebase.auth.Auth.Persistence.LOCAL
+    }
+
     // Sign in using email as user name and their password
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().setPersistence(AUTH_PERSISTENCE.SESSION)
     .then(function (user) {
-      console.log(user);
+      return firebase.auth().signInWithEmailAndPassword(email, password);
+    })
+    .catch(function(error) {
+      // do something on error here
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    })
+    .then(function(data) {
+      console.log(data);
       if (firebaseUserAccount.checkSignedIn()) {
         console.log('ok to show the users account');
       }
+      else{
+        console.log('not ok to show the users account');
+      }
+    })
+    .catch(function(error) {
+      // do something on error here
+      var errorCode = error.code;
+      var errorMessage = error.message;
     });
   };
 
@@ -67,18 +89,22 @@
    * @returns {boolean}
    */
   FirebaseUserAccount.prototype.checkSignedIn = function () {
+    console.log('method called!');
     return firebase.auth().currentUser
       ? true
       : false;
   };
 
-  document.querySelector('[data-login-in-button]')
-  .addEventListener('click', function (event) {
-    var userName = document.querySelector('#user_name').value;
-    var password = document.querySelector('#password').value;
-    console.log(userName);
-    firebaseUserAccount.signIn(userName, password);
-  });
+  // register event listener if login component exists
+  if (document.querySelector('[data-login-in-button]')) {
+    document.querySelector('[data-login-in-button]')
+    .addEventListener('click', function (event) {
+      var userName = document.querySelector('#user_name').value;
+      var password = document.querySelector('#password').value;
+      firebaseUserAccount.signIn(userName, password);
+    });
+  }
+
   var firebaseUserAccount = new FirebaseUserAccount();
 
 })();
